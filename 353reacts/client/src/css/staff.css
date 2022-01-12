@@ -1,0 +1,23 @@
+  #table {
+    /* background-color:  rgb(0, 0, 0,0.7); */
+    border-collapse: collapse;
+    width: auto;
+  }
+  
+  #table td, #table th {
+    width: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  #table tr:nth-child(even){background-color: #ddd;}
+  
+  #table tr {background-color: #ddd;}
+  
+  #table th {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  } 

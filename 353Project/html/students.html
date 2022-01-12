@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Help English</title>
+        <link rel="stylesheet" href="/css/students.css">
+    </head> 
+    <body>
+    <div class="container">
+        <div>
+            <h1>LEARNING ENGLISH COMMUNITY</h1>
+        </div>
+        <div>
+            <h2>Students</h2>
+            <div class="student-container">
+                <form action="/home" method="GET">
+                    <input type="submit" value="HOME" id = "home">
+                </form><br>
+            </div>
+            <!-- <div class="search-student">
+                <label for="name" id = "search">Search By Name</label>
+                <input type="text" id="name" name="name" required placeholder="John Doe"><br>
+            </div> -->
+            <div id = "table"></div>
+            </div>
+    </div>
+    </body>
+    <script>
+        window.onload=students()
+        function students(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // document.getElementById("display-student").innerHTML=""
+                var text = JSON.parse(this.responseText);
+                maketable(text)
+                // displayStudent(text)
+            }
+        };
+        xhttp.open("GET", "/getstudent", true);
+        xhttp.send();
+        function maketable(studentList){
+            var str = '<table>';
+            str += '<tr><th>First Name</th><th>Last Name</th><th>Adress</th><th>Phone</th><th>Join Date</th>';
+            str += '<th>First Language</th><th>Starting Level</th><th>Current Level</th><th>Current Level Date</th><th>School</th><th>Decrease Level</th><th>Increase Level</th><th>Delete</th><th>Add Report</th></tr>';
+            studentList.forEach(value => {
+                var joindate = new Date(value.joindate).toDateString()
+                var curleveldate = new Date(value.curleveldate).toDateString()
+                str += '<tr><td>'+ value.firstname +'</td><td>'+ value.lastname +'</td><td>'+ value.address +'</td><td>'+ value.phone +'</td><td>'+ joindate +'</td>';
+                str += '<td>'+ value.firstlanguage +'</td><td>'+ value.startenglevel +'</td><td>'+ value.currenglevel +'</td><td>'+ curleveldate +'</td><td>'+ value.school;
+                str += `</td><td><button id="${value.phone}">Decrease English Level</button></td><td><button id="${value.phone+1}">Increase English Level</button></td><td><button id="${value.phone+2}">Delete Student</button></td><td><button id="${value.phone+3}">Add Report</button></td></td></tr>`;
+            })
+            str += "</table>";
+            document.getElementById("table").innerHTML=str;
+            studentList.forEach(value => {
+                // console.log(document.getElementById(value.phone+1))
+                if(value.currenglevel>1){
+                    document.getElementById(value.phone).addEventListener("click",()=>editStudent(value.phone,true))
+                }
+                if (value.currenglevel<3){
+                    document.getElementById(value.phone+1).addEventListener("click",()=>editStudent(value.phone,false)) 
+                }
+                document.getElementById(value.phone+2).addEventListener("click",()=>deleteStudent(value.phone))
+                document.getElementById(value.phone+3).addEventListener("click",()=>addreport(value.phone))
+            })
+        }
+
+        function deleteStudent(value){
+
+            var xhttp = new XMLHttpRequest();
+           
+            xhttp.open("POST", `/deletestudent/${value}`, true);
+            xhttp.send();
+            students()
+        }
+
+        function editStudent(value, isDecrease){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange=function(){
+                students()
+            }
+            if (isDecrease){
+                xhttp.open("PUT", `/editstudent/${value}/decrease`, true);    
+            } else {
+                xhttp.open("PUT", `/editstudent/${value}/increase`, true);
+            }
+            xhttp.send();
+        }
+    }
+        function addreport(value){
+            window.location.href=`/student/addreport/${value}`
+        }
+
+    </script>
+</html>

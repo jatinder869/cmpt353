@@ -1,0 +1,153 @@
+        function displayStudent(studentList){
+            const container = document.getElementById("display-student")
+
+            studentList.forEach(value => {
+                const subContainer = document.createElement("div")
+                subContainer.classList.add("student-list")
+
+                const firstname = document.createElement("div")
+                firstname.classList.add("student-member")
+                const firstnameContent = document.createTextNode(value.firstname)
+                firstname.appendChild(firstnameContent)
+                
+                const lastname = document.createElement("div")
+                lastname.classList.add("student-member")
+                const lastnameContent = document.createTextNode(value.lastname)
+                lastname.appendChild(lastnameContent)
+                
+                const address = document.createElement("div")
+                address.classList.add("student-member")
+                const addressContent = document.createTextNode(value.address)
+                address.appendChild(addressContent)
+
+                const phone = document.createElement("div")
+                phone.classList.add("student-member")
+                const phoneContent = document.createTextNode(value.phone)
+                phone.appendChild(phoneContent)
+
+                const joindate = document.createElement("div")
+                joindate.classList.add("student-member")
+                const joindateContent = document.createTextNode(new Date(value.joindate).toDateString())
+                joindate.appendChild(joindateContent)
+
+                const firstlanguage = document.createElement("div")
+                firstlanguage.classList.add("student-member")
+                const languageContent = document.createTextNode(value.firstlanguage)
+                firstlanguage.appendChild(languageContent)
+                
+                const startenglevel = document.createElement("div")
+                startenglevel.classList.add("student-member")
+                const strartengContent = document.createTextNode(value.startenglevel)
+                startenglevel.appendChild(strartengContent)
+
+                const curenglevel = document.createElement("div")
+                curenglevel.classList.add("student-member")
+                const curengContent = document.createTextNode(value.currenglevel)
+                curenglevel.appendChild(curengContent)
+
+                const curleveldate = document.createElement("div")
+                curleveldate.classList.add("student-member")
+                const curleveldateContent = document.createTextNode(new Date(value.curleveldate).toDateString())
+                curleveldate.appendChild(curleveldateContent)
+
+                const school = document.createElement("div")
+                school.classList.add("student-member")
+                const schoolContent = document.createTextNode(value.school)
+                school.appendChild(schoolContent)
+
+                const deletebutton = document.createElement("button")
+                deletebutton.addEventListener("click", () => deleteStudent(value.phone))
+                const buttontext = document.createTextNode("Delete Student")
+                deletebutton.appendChild(buttontext)
+
+                subContainer.appendChild(firstname)
+                subContainer.appendChild(lastname)
+                subContainer.appendChild(address)
+                subContainer.appendChild(phone)
+                subContainer.appendChild(joindate)
+                subContainer.appendChild(firstlanguage)
+                subContainer.appendChild(startenglevel)
+                subContainer.appendChild(curenglevel)
+                subContainer.appendChild(curleveldate)
+                subContainer.appendChild(school)
+                if(value.currenglevel < 3)
+                {
+                const editbutton = document.createElement("button")
+                editbutton.addEventListener("click", () => editStudent(value.phone,false))
+                const editbuttontext = document.createTextNode("Increase English Level")
+                editbutton.appendChild(editbuttontext)
+                subContainer.appendChild(editbutton)
+                }
+
+                if(value.currenglevel > 1)
+                {
+                const decreasebutton = document.createElement("button")
+                decreasebutton.addEventListener("click", () => editStudent(value.phone, true))
+                const decreasebuttontext = document.createTextNode("Decrease English Level")
+                decreasebutton.appendChild(decreasebuttontext)
+                subContainer.appendChild(decreasebutton)
+                }
+                subContainer.appendChild(deletebutton)
+                container.appendChild(subContainer)                
+            })
+        }
+
+function displayStaff(staffList){
+            const container = document.getElementById("display-staff")
+
+            staffList.forEach(value => {
+                const subContainer = document.createElement("div")
+                subContainer.classList.add("staff-list")
+
+                const firstname = document.createElement("div")
+                firstname.classList.add("staff-member")
+                const firstnameContent = document.createTextNode(value.firstname)
+                firstname.appendChild(firstnameContent)
+                
+                const lastname = document.createElement("div")
+                lastname.classList.add("staff-member")
+                const lastnameContent = document.createTextNode(value.lastname)
+                lastname.appendChild(lastnameContent)
+                
+                const address = document.createElement("div")
+                address.classList.add("staff-member")
+                const addressContent = document.createTextNode(value.address)
+                address.appendChild(addressContent)
+
+                const phone = document.createElement("div")
+                phone.classList.add("staff-member")
+                const phoneContent = document.createTextNode(value.phone)
+                phone.appendChild(phoneContent)
+
+                const email = document.createElement("div")
+                email.classList.add("staff-member")
+                const emailContent = document.createTextNode(value.email)
+                email.appendChild(emailContent)
+
+                const startdate = document.createElement("div")
+                startdate.classList.add("staff-member")
+                const startdateContent = document.createTextNode(new Date(value.startdate).toDateString())
+                startdate.appendChild(startdateContent)
+                
+                const available = document.createElement("div")
+                available.classList.add("staff-member")
+                const availableContent = document.createTextNode(value.available)
+                available.appendChild(availableContent)
+
+                const deletebutton = document.createElement("button")
+                deletebutton.addEventListener("click", () => deleteStaff(value.phone))
+                const buttontext = document.createTextNode("Delete Staff Member")
+                deletebutton.appendChild(buttontext)
+
+                subContainer.appendChild(firstname)
+                subContainer.appendChild(lastname)
+                subContainer.appendChild(address)
+                subContainer.appendChild(phone)
+                subContainer.appendChild(email)
+                subContainer.appendChild(startdate)
+                subContainer.appendChild(available)
+                subContainer.appendChild(deletebutton)
+
+                container.appendChild(subContainer)                
+            })
+        }

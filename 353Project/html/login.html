@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Help English</title>
+        <link rel="stylesheet" href="/css/login.css">
+    </head> 
+    <body>
+    <div class="container">
+            <h1>LEARN ENGLISH COMMUNITY</h1>
+        <section>
+            <div class="login-form">
+                <h2>STAFF ADMIN LOGIN</h2>
+            <form action="login" method="POST" >     
+                <input type="text" name="username" id="username" placeholder="Username" required>
+				<input type="password" name="password" id="password" placeholder="Password" required>
+				<input type="submit" onclick="post()">
+            </form>
+            </div>    
+        </section>
+    </div>
+    </body>
+    <script>
+        function post() {
+        var xhttp = new XMLHttpRequest();
+        let username=document.getElementById("username").value;
+        let password=document.getElementById("password").value;
+
+        xhttp.open("POST", "/login", true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send("username="+username+"&password="+password);
+    }
+    </script>
+</html>

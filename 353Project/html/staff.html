@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Help English</title>
+        <link rel="stylesheet" href="/css/staff.css">
+    </head> 
+    <body>
+    <div class="container">
+        <div>
+            <h1>LEARNING ENGLISH COMMUNITY</h1>
+        </div>
+        <div>
+            <h2>Staff Members</h2>
+                <form action="/home" method="GET" class="staff-container">
+                    <input type="submit" value="HOME" id = "home">
+                </form><br>
+            <div id="table"></div> 
+        </div>
+    </div>
+    </body>
+    <script>
+        window.onload=staff()
+        function staff(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                    // document.getElementById("display-staff").innerHTML=""
+                    var text = JSON.parse(this.responseText);
+                    maketable(text)
+                    // displayStaff(text)
+            }
+            };
+            xhttp.open("GET", "/getstaff", true);
+            xhttp.send();
+
+
+        function maketable(staffList){
+            var str = '<table>';
+            str += '<tr><th>First Name</th><th>Last Name</th><th>Adress</th><th>Phone</th><th>Email</th>';
+            str += '<th>Start Date</th><th>Available Days</th><th>Delete</th></tr>';
+            staffList.forEach(value => {
+                var startdate = new Date(value.startdate).toDateString()
+                str += '<tr><td>'+ value.firstname +'</td><td>'+ value.lastname +'</td><td>'+ value.address +'</td><td>'+ value.phone +'</td>';
+                str += '<td>'+ value.email +'</td><td>'+ startdate +'</td><td>'+ value.available +'</td>';
+                str += `<td><button id="${value.phone}">Delete Staff Member</button></td>`;
+            })
+            str += "</table>";
+            document.getElementById("table").innerHTML=str;
+            staffList.forEach(value => {
+                document.getElementById(value.phone).addEventListener("click",()=>deleteStaff(value.phone))
+            })
+        }
+
+        function deleteStaff(value){
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("DELETE", `/deletestaff/${value}`, true);
+            xhttp.send();
+            staff()
+        }
+        }
+
+    </script>
+</html>

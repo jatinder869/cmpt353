@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Help English</title>
+        <link rel="stylesheet" href="/css/addstaff.css">
+    </head> 
+    <body>
+    <div class="container">
+        <div>
+            <h1>LEARNING ENGLISH COMMUNITY</h1>
+        </div>
+            <form action="/home" method="GET" class="staff-container" >
+                <input type="submit" value="HOME" id = "home">
+            </form><br>
+        <div>
+            <h2>Add New Staff Member</h2>
+            <div class="form-container">
+            <form action="addstaff" class="addstaff-form" method="POST">
+                
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="firstname" required placeholder="John"><br>
+                
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lastname" required placeholder="Doe"><br>
+                
+                <label for="adrs">Address</label>
+                <input type="text" id="adrs" name="address" required placeholder="123 mapple st anytown"><br>
+                
+                <label for="phn">Phone</label>
+                <input type="int" id="phn" name="phone" required placeholder="1234567890"><br>
+                
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" required placeholder="example@example.com"><br>
+                
+                <label for="startdate">Start Date</label>
+                <input type="date" id="startdate" name="startdate" required min="2021-12-01"><br>
+                
+                <label for="available">Availability</label>
+                <select name="available" id="days" required>
+                    <option value=""selected disabled hidden>Choose Days Available</option>
+                    <option value="mondaytuesday">Monday-Tuesday</option>
+                    <option value="wednesdaythursday">Wednesday-Thursday</option>
+                    <option value="fridaysaturday">Friday-Saturday</option>
+                </select>
+                <input type="submit" value="Submit Form">
+            </form>
+        </div>
+        </div>
+    </div>
+    </body>
+</html>
